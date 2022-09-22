@@ -5,7 +5,7 @@ require 'colorize'
 # of up to 12 moves not, not only guess the colors, but their sequence of occurence
 
 # colors I know
-colors = ['cyan'.cyan, 'red'.red, 'green'.green, 'blue'.blue, 'white'.white, 'yellow'.yellow]
+colors = ['cyan', 'red', 'green', 'blue', 'white', 'yellow']
 
 # randomizing the color
 def random_color(colors)
@@ -22,4 +22,22 @@ def multi_rand_colors(colors)
   new_set
 end
 
-puts multi_rand_colors(colors)
+# mini game
+def mini_game(colors)
+  random_colors = multi_rand_colors(colors)
+  move = gets.chomp
+  if random_colors.any?(move)
+    puts "#{move} is in the mix!"
+    random_colors.each_with_index do |color, index|
+      if color == move
+        puts "The color is at index #{index}"
+        return
+      end
+    end
+  else
+    puts "#{move} is not in the mix"
+    random_colors
+  end
+end
+
+mini_game(colors)
