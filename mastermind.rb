@@ -66,14 +66,9 @@ def match(colors, index_to_color, board)
   colors.each_with_index do |color, index|
     index_to_color.each_with_index do |color2, index2|
       if color == color2 && index == index2
-        # index + 1
-        # puts color
         board[index] = color
-        # return true
       end
-      # board_layout(board)
     end
-    # board_layout(board)
   end
   board_layout(board)
 end
@@ -84,15 +79,29 @@ def arrayfy(strings)
   strings.join
 end
 
+def end_game_naration(board, random_colors)
+  if board.none?('')
+    puts 'congratulations!! You win!'
+  else
+    puts 'Out of moves! Try again later!'
+  end
+  p random_colors
+end
 # mini game
 def mini_game(colors, board)
   puts "Welcome to mastermind game! the rules are simple. 1 = cyan, 2 = red, 3 = green, 4 = blue, 5 = white, 6 = yellow
   Choose the right combination!"
   random_colors = multi_rand_colors(colors)
-  move = gets.chomp
-  index_move = get_indexes(move)
+  count = 6
   # index_to_color(index_move)
-  match(random_colors, index_to_color(index_move), board)
+  until board.none?('') || count == 0
+    move = gets.chomp
+    index_move = get_indexes(move)
+    match(random_colors, index_to_color(index_move), board)
+    count -= 1
+    p "You have #{count} moves left!"
+  end
+  end_game_naration(board, random_colors)
 end
 
 mini_game(colors, board)
