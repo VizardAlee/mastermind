@@ -34,15 +34,43 @@ def get_indexes(index_move)
 end
 
 # match indexes to color
-def index_to_color(colors, index_move)
-  index_move.map do |value|
-    colors.each_with_index do |color, index|
-      if value == index
-        puts color
-      end
+def index_to_color(index_move)
+  the_vals = index_move.map do |value|
+    if value == 1
+      value = 'cyan'
+    elsif value == 2
+      value = 'red'
+    elsif value == 3
+      value = 'green'
+    elsif value == 4
+      value = 'blue'
+    elsif value == 5
+      value = 'white'
+    elsif value == 6
+      value = 'yellow'
     end
   end
+  the_vals
+=begin
+  some = index_move.map do |value|
+    see = colors.each_with_index do |color, index|
+      if value == index
+        p color
+      end
+    end
+    see
+  end
+  p some
+=end
 end
+# index_to_color([6,5,4,3])
+
+def arrayfy(strings)
+  strings.join
+end
+
+# arrayfy('strings and stuff')
+
 # index_to_color(colors, [0,1,2,5])
 # mini game
 def mini_game(colors)
@@ -51,7 +79,7 @@ def mini_game(colors)
   random_colors = multi_rand_colors(colors)
   move = gets.chomp
   index_move = get_indexes(move)
-  index_to_color(colors, index_move)
+  index_to_color(index_move)
 =begin
   if random_colors.any?(index_move)
     puts "#{index_move} is in the mix!"
@@ -68,4 +96,4 @@ def mini_game(colors)
 =end
 end
 
-mini_game(colors)
+p mini_game(colors)
