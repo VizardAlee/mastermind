@@ -6,10 +6,17 @@ require 'colorize'
 
 # colors I know
 colors = ['cyan', 'red', 'green', 'blue', 'white', 'yellow']
+board = ['', '', '', '']
+
+# board layout
+def board_layout(board)
+  puts " --#{board[0]}-- | --#{board[1]}-- | --#{board[2]}-- | --#{board[3]}-- "
+end
+
+# board_layout(board)
 
 # randomizing the color
 def random_color(colors)
-  puts 'computer move'
   colors.sample
 end
 
@@ -55,31 +62,37 @@ def index_to_color(index_move)
 end
 # index_to_color([6,5,4,3])
 
-def match(colors, index_to_color)
+def match(colors, index_to_color, board)
   colors.each_with_index do |color, index|
     index_to_color.each_with_index do |color2, index2|
       if color == color2 && index == index2
-        puts color
+        # index + 1
+        # puts color
+        board[index] = color
+        # return true
       end
+      # board_layout(board)
     end
+    # board_layout(board)
   end
+  board_layout(board)
 end
 
-# match(colors, %w[white red brown blue])
+# match(colors, %w[cyan red green blue], board)
 
 def arrayfy(strings)
   strings.join
 end
 
 # mini game
-def mini_game(colors)
-  puts "Welcome to mastermind game! the rules are simple.0 = cyan, 1 = red, 2 = green, 3 = blue, 4 = white, 5 = yellow
+def mini_game(colors, board)
+  puts "Welcome to mastermind game! the rules are simple. 1 = cyan, 2 = red, 3 = green, 4 = blue, 5 = white, 6 = yellow
   Choose the right combination!"
   random_colors = multi_rand_colors(colors)
   move = gets.chomp
   index_move = get_indexes(move)
   # index_to_color(index_move)
-  match(random_colors, index_to_color(index_move))
+  match(random_colors, index_to_color(index_move), board)
 end
 
-mini_game(colors)
+mini_game(colors, board)
