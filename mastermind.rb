@@ -81,20 +81,20 @@ end
 
 def end_game_naration(board, random_colors)
   if board.none?('')
-    puts 'congratulations!! You win!'
+    puts 'congratulations!!'
   else
     puts 'Out of moves! Try again later!'
   end
   p random_colors
 end
+
 # mini game
-def mini_game(colors, board)
+def decoder_game(colors, board)
   puts "Welcome to mastermind game! the rules are simple. 1 = cyan, 2 = red, 3 = green, 4 = blue, 5 = white, 6 = yellow
   Choose the right combination!"
   random_colors = multi_rand_colors(colors)
   count = 6
-  # index_to_color(index_move)
-  until board.none?('') || count == 0
+  until board.none?('') || count.zero?
     move = gets.chomp
     index_move = get_indexes(move)
     match(random_colors, index_to_color(index_move), board)
@@ -104,4 +104,22 @@ def mini_game(colors, board)
   end_game_naration(board, random_colors)
 end
 
-mini_game(colors, board)
+# decoder_game(colors, board)
+
+def setter_game(colors, board)
+  puts 'Welcome to mastermind game! Set the colors let computer decode them in 6 moves'
+  # random_colors = multi_rand_colors(colors)
+  count = 6
+  set_colors = gets.chomp
+  index_move = get_indexes(set_colors)
+  move = index_to_color(index_move)
+  until board.none?('') || count.zero?
+    random_colors = multi_rand_colors(colors)
+    match(move, random_colors, board)
+    count -= 1
+    p "#{count} moves left!"
+  end
+  end_game_naration(board, move)
+end
+
+setter_game(colors, board)
