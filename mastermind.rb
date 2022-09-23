@@ -9,6 +9,7 @@ colors = ['cyan', 'red', 'green', 'blue', 'white', 'yellow']
 
 # randomizing the color
 def random_color(colors)
+  puts 'computer move'
   colors.sample
 end
 
@@ -51,27 +52,25 @@ def index_to_color(index_move)
     end
   end
   the_vals
-=begin
-  some = index_move.map do |value|
-    see = colors.each_with_index do |color, index|
-      if value == index
-        p color
-      end
-    end
-    see
-  end
-  p some
-=end
 end
 # index_to_color([6,5,4,3])
+
+def match(colors, index_to_color)
+  colors.each_with_index do |color, index|
+    index_to_color.each_with_index do |color2, index2|
+      if color == color2 && index == index2
+        puts color
+      end
+    end
+  end
+end
+
+# match(colors, %w[white red brown blue])
 
 def arrayfy(strings)
   strings.join
 end
 
-# arrayfy('strings and stuff')
-
-# index_to_color(colors, [0,1,2,5])
 # mini game
 def mini_game(colors)
   puts "Welcome to mastermind game! the rules are simple.0 = cyan, 1 = red, 2 = green, 3 = blue, 4 = white, 5 = yellow
@@ -79,21 +78,8 @@ def mini_game(colors)
   random_colors = multi_rand_colors(colors)
   move = gets.chomp
   index_move = get_indexes(move)
-  index_to_color(index_move)
-=begin
-  if random_colors.any?(index_move)
-    puts "#{index_move} is in the mix!"
-    random_colors.each_with_index do |color, index|
-      if color == index_move
-        puts "The color is at index #{index}"
-        break
-      end
-    end
-  else
-    puts "#{index_move} is not in the mix"
-    p random_colors
-  end
-=end
+  # index_to_color(index_move)
+  match(random_colors, index_to_color(index_move))
 end
 
-p mini_game(colors)
+mini_game(colors)
